@@ -168,7 +168,6 @@ table = pd.crosstab(
 print(table)
 chi2,p,_,_ = chi2_contingency(table)
 
-
 print(chi2, p) # 0.0 1.0
 
 # 결론
