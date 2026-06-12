@@ -143,3 +143,36 @@ print(result)
 
 # tips 예제
 # 남성과 여성의 팁 금액 평균은 다를까? (t-test)
+male = tips[tips["sex"]=="Male"]["tip"]
+female = tips[tips["sex"]=="Female"]["tip"]
+
+st, pv = stats.ttest_ind(male,female) # 1.387859705421269 0.16645623503456755
+print(st,pv)
+
+# 결론
+# p > 0.05 귀무가설 채택
+# 남녀 팁 평균의 차이가 있다고 보기 어렵다.
+
+
+#  흡연 여부와 성별은 관련이 있을까? (카이제곱)
+# → 범주형 × 범주형
+
+table = pd.crosstab(
+    tips["sex"],
+    tips["smoker"]
+)
+
+# 귀무가설 : 흡연여부는 성별과 상관이 없다.
+# 대립가설 : 흡연여부는 성별과 상관이 있다.
+
+print(table)
+chi2,p,_,_ = chi2_contingency(table)
+
+
+print(chi2, p) # 0.0 1.0
+
+# 결론
+# p =  1.0 > 0.05 보다 크므로 귀무가설 유지
+# 통계적으로 성별에 따른 흡연여부는 유의미한 차이를 발견하지 못햇다.
+
+
