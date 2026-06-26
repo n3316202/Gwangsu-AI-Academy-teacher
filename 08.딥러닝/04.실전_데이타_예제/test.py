@@ -64,12 +64,13 @@ from keras.layers import Dense, Input
 # 컬럼수 4~10 => 8 ~ 32
 # 10~50개	16~64개
 # 50개 이상	32~256개
+
+# 히든레이어는 = 총 데이터수 고려
+# 뉴런은 = 총컬럼수 고려
 model = Sequential([
-    Input(shape=(8,)), # 총 컬럼수
-    
+    Input(shape=(8,)), # 총 컬럼수    
     Dense(12,activation="relu"),
-    Dense(8,activation="relu"),
-    
+    Dense(8,activation="relu"),    
     Dense(1,activation="sigmoid"),
 
 ])
