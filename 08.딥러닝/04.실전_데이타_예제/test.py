@@ -55,6 +55,7 @@ from keras.models import Sequential
 from keras.layers import Dense, Input
 
 # 모델링
+# 히든레이어 갯수 
 # 데이터 크기 => 768 기준
 # 데이타 천개 이하 => 1 또는 2개
 # 만개 이하 => 2-3개
