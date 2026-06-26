@@ -23,3 +23,5 @@ print(df)
 
 df.info()
 
+# 정상과 당뇨 환자가 각각 몇 명씩인지 조사
+print(df["diabetes"].value_counts())
