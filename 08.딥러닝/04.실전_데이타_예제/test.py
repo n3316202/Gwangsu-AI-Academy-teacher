@@ -70,7 +70,8 @@ x_train,x_test, y_train,y_test = train_test_split(
 
 # 정규화
 scaler = StandardScaler()
-
+x_train = scaler.fit_transform(x_train)
+x_test = scaler.transform(x_test)
 
 from keras.models import Sequential
 from keras.layers import Dense, Input
