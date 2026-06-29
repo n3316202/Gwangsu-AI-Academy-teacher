@@ -125,7 +125,8 @@ print()
 print("테스트 Loss :", round(loss, 4))
 print("테스트 Accuracy :", round(acc, 4))
 
-# 시각화
+# 시각화 
+# 정확도
 plt.figure(figsize=(8, 4))
 
 plt.plot(history.history["accuracy"])
@@ -141,3 +142,44 @@ plt.legend([
 ])
 
 plt.show()
+
+# Loss 그래프
+
+plt.figure(figsize=(8, 4))
+
+plt.plot(history.history["loss"])
+plt.plot(history.history["val_loss"])
+
+plt.title("Model Loss")
+plt.xlabel("Epoch")
+plt.ylabel("Loss")
+
+plt.legend([
+    "Train",
+    "Validation"
+])
+
+plt.show()
+
+# 예측
+
+pred = model.predict(x_test)
+print(pred)
+
+# 새로운 환자 예측
+
+new_patient = np.array([
+    [2, 120, 70, 20, 85, 25.0, 0.3, 35]
+])
+
+new_patient = scaler.transform(new_patient)
+
+result = model.predict(new_patient)
+
+print()
+print("당뇨병 확률 :", round(result[0][0] * 100, 2), "%")
+
+if result[0][0] >= 0.5:
+    print("예측 : 당뇨병")
+else:
+    print("예측 : 정상")
