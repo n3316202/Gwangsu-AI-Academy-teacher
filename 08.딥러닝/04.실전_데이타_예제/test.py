@@ -96,3 +96,4 @@ model = Sequential([
     Dense(1,activation="sigmoid"),
 ])
 
+model.summary()
