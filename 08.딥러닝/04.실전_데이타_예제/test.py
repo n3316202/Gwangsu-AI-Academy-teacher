@@ -124,3 +124,20 @@ loss, acc = model.evaluate(
 print()
 print("테스트 Loss :", round(loss, 4))
 print("테스트 Accuracy :", round(acc, 4))
+
+# 시각화
+plt.figure(figsize=(8, 4))
+
+plt.plot(history.history["accuracy"])
+plt.plot(history.history["val_accuracy"])
+
+plt.title("Model Accuracy")
+plt.xlabel("Epoch")
+plt.ylabel("Accuracy")
+
+plt.legend([
+    "Train",
+    "Validation"
+])
+
+plt.show()
