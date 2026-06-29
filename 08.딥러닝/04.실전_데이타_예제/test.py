@@ -6,6 +6,10 @@ from tensorflow.keras.layers import Dense
 import numpy as np
 import pandas as pd
 
+# =====================================
+# 1. 데이터 불러오기
+# =====================================
+
 df = pd.read_csv(r"D:\Gwangsu-AI-Academy-teacher\08.딥러닝\04.실전_데이타_예제\pima-indians-diabetes3.csv")
 print(df)
 
@@ -42,6 +46,9 @@ import seaborn as sns
 # sns.heatmap(df.corr(),linewidths=0.1,vmax=0.5, cmap=colormap, linecolor='white', annot=True)
 # plt.show()
 
+# =====================================
+# 2. X, y 분리
+# =====================================
 # 데이타 나누기
 # 세부 정보를 X로 지정합니다.
 x = df.iloc[  : , 0:8]
@@ -54,12 +61,15 @@ y = df.iloc[  : ,  8]
 # 학습용 / 테스트용 데이터 분리
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
+
 # 정상 : 980명
 # 암환자 : 20명
 
-
 # 정상 : 200명
 # 암환자 : 0명
+# =====================================
+# 3. 학습용 / 테스트용 분리
+# =====================================
 x_train,x_test, y_train,y_test = train_test_split(
     x,
     y,
@@ -68,6 +78,9 @@ x_train,x_test, y_train,y_test = train_test_split(
     stratify = y # 같은 비율로 들어 갈수 있도록 #분류 모델에서는 stratify=y 로 할것 
 )
 
+# =====================================
+# 4. 정규화
+# =====================================
 # 정규화
 scaler = StandardScaler()
 x_train = scaler.fit_transform(x_train)
@@ -89,6 +102,9 @@ from keras.layers import Dense, Input
 
 # 히든레이어는 = 총 데이터수 고려
 # 뉴런은 = 총컬럼수 고려
+# =====================================
+# 5. 모델 생성
+# =====================================
 model = Sequential([
     Input(shape=(8,)), # 총 컬럼수    
     Dense(12,activation="relu"),
@@ -98,6 +114,9 @@ model = Sequential([
 
 model.summary()
 
+# =====================================
+# 6. 컴파일
+# =====================================
 model.compile(
     optimizer="adam",
     loss="binary_crossentropy",
@@ -105,6 +124,10 @@ model.compile(
 )
 
 # 학습
+# =====================================
+# 7. 학습
+# =====================================
+# 99/99 ━━━━━━━━━━━━━━━━━━━━ 0s 2ms/step - accuracy: 0.8330 - loss: 0.3676 - val_accuracy: 0.8130 - val_loss: 0.4356
 history = model.fit(
     x_train,
     y_train,
@@ -120,6 +143,9 @@ loss, acc = model.evaluate(
     y_test,
     verbose=0
 )
+
+# 테스트 Loss : 0.5363  # 평균오차 or 모델이 틀린 정도를 나타내는 값
+# 테스트 Accuracy : 0.7468
 
 print()
 print("테스트 Loss :", round(loss, 4))
@@ -173,7 +199,6 @@ new_patient = np.array([
 ])
 
 new_patient = scaler.transform(new_patient)
-
 result = model.predict(new_patient)
 
 print()
