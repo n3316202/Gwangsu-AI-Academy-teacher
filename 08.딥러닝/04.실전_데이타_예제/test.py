@@ -44,7 +44,7 @@ import seaborn as sns
 
 # 데이타 나누기
 # 세부 정보를 X로 지정합니다.
-x = df.iloc[  : ,   0:8]
+x = df.iloc[  : , 0:8]
 # 당뇨병 여부를 Y로 지정합니다.
 y = df.iloc[  : ,  8]
 
