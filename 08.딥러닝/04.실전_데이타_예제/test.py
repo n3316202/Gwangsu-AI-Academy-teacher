@@ -97,3 +97,30 @@ model = Sequential([
 ])
 
 model.summary()
+
+model.compile(
+    optimizer="adam",
+    loss="binary_crossentropy",
+    metrics=["accuracy"]
+)
+
+# 학습
+history = model.fit(
+    x_train,
+    y_train,
+    epochs=100,
+    batch_size=5,# 5개 학습하고 가중치 수정
+    validation_split=0.2,
+    verbose=1
+)
+
+# 평가 
+loss, acc = model.evaluate(
+    x_test,
+    y_test,
+    verbose=0
+)
+
+print()
+print("테스트 Loss :", round(loss, 4))
+print("테스트 Accuracy :", round(acc, 4))
