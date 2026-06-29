@@ -48,11 +48,26 @@ x = df.iloc[  : , 0:8]
 # 당뇨병 여부를 Y로 지정합니다.
 y = df.iloc[  : ,  8]
 
-print(x)
-print(y)
+# print(x)
+# print(y)
+
+# 학습용 / 테스트용 데이터 분리
+from sklearn.model_selection import train_test_split
+
+x_train,x_test,y_train,y_test = train_test_split(
+    x,
+    y,
+    test_size=0.2,
+    random_state=42
+)
+
+
 
 from keras.models import Sequential
 from keras.layers import Dense, Input
+
+
+
 
 # 모델링
 # 데이터 크기 => 768 기준
@@ -73,3 +88,4 @@ model = Sequential([
     Dense(8,activation="relu"),    
     Dense(1,activation="sigmoid"),
 ])
+
