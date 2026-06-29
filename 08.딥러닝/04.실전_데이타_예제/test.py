@@ -53,13 +53,24 @@ y = df.iloc[  : ,  8]
 
 # 학습용 / 테스트용 데이터 분리
 from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+# 정상 : 980명
+# 암환자 : 20명
 
+
+# 정상 : 200명
+# 암환자 : 0명
 x_train,x_test, y_train,y_test = train_test_split(
     x,
     y,
     test_size=0.2,
-    random_state=42
+    random_state=42,
+    stratify = y # 같은 비율로 들어 갈수 있도록 #분류 모델에서는 stratify=y 로 할것 
 )
+
+# 정규화
+scaler = StandardScaler()
+
 
 from keras.models import Sequential
 from keras.layers import Dense, Input
