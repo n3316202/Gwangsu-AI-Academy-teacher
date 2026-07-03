@@ -25,8 +25,6 @@ import os
 sys.path.append(str(Path(__file__).resolve().parent.parent))
 from llm_loader import init_custom_llm
 
-print(init_custom_llm)
-
 llm = init_custom_llm()
 respose = llm.invoke(prompt)
 
