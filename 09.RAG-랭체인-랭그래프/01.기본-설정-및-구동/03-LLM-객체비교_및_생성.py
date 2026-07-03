@@ -29,3 +29,4 @@ llm = init_chat_model(model_name)
 respose = llm.invoke("오늘 날씨 어때?")
 print(respose.content)
 print(respose)
+
