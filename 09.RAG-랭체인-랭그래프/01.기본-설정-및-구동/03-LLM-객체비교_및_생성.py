@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 from langchain_openai import OpenAI
 from langchain_openai import ChatOpenAI
 
-load_dotenv()
+# load_dotenv()
 
 # llm 객체 생성 방법 3가지 
 
