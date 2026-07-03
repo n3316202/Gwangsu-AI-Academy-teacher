@@ -18,8 +18,6 @@ prompt = """
 나는 오늘 학교에 갔다.
 """
 
-
-
 import sys
 from pathlib import Path
 import os
