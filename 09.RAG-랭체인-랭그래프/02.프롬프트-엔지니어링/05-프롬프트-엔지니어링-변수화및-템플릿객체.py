@@ -42,16 +42,20 @@ prompt = PromptTemplate.from_template("""
 - 예제 포함
                                                                             
 """)
+
 result = prompt.invoke({"topic":"머신러닝"})
 #result = prompt.format(topic="반복문")
 
 print(type(result))
 print(result)
 
-prompt = ChatPromptTemplate.from_template("""
-                                                                              
-""")
+messages = ChatPromptTemplate.from_messages([
+  ("system", "당신은 Python 강사입니다."),
+  ("human", "{topic}을 설명하세요")  
+])
 
+print(messages)
+result = messages.invoke({"topic","딕셔너리"})
 
 llm = init_custom_llm()
 respose = llm.invoke(result)
