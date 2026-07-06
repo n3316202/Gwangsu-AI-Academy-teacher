@@ -39,6 +39,7 @@ prompt = """
 - Markdown 표 형식
 - 마지막에 한 줄 요약 포함
 """
+
 # Prompt 4요소 설계법 (실전 템플릿)
 prompt = """
 # 1. ROLE (역할)
