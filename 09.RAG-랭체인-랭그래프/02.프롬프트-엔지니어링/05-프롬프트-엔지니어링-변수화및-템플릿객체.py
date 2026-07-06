@@ -4,9 +4,6 @@ from langchain.chat_models import init_chat_model
 from langchain_core.prompts import ChatPromptTemplate
 from openai import OpenAI
 
-# 언어 모델은 주어진 예제들을 참고하여 더 정확하고 일관된 응답을 생성
-# 이렇게 해야만 토큰을 아낄수 있음
-
 # 1. JSON 출력 강제하기
 # 일반출력
 # 결과가 자유로운 텍스트로 나옴(파싱 불가능)
