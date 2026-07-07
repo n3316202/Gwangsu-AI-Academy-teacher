@@ -10,7 +10,11 @@ from langchain_core.messages import SystemMessage, HumanMessage, AIMessage,ToolM
 #================= 대화 이어가기 = 챗 GPT 만들기
 
 messages = [
-    SystemMessage(content="당신은 친절한 AI 입니다.")
+    SystemMessage(content="당신은 친절한 AI 입니다."),
+    # HumanMessage(content="나는 홍길동 입니다.")
+    # AIMessage(content="안녕하세요 홍길동씨 무엇을 도와 드릴까요"),
+    # HumanMessage(content="나는 누구니"),
+    # AIMessage(content="당신은 홍길동 입니다."),
 ]
 
 while True:
