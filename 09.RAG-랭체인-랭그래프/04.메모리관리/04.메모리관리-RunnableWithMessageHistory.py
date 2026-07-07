@@ -4,9 +4,11 @@
 # 직접 저장 → 불편함 → RunnableWithMessageHistory → 자동 저장
 
 # 예제 1. 직접 저장하는 방식 (복습)
+
 # history.add_user_message(question)
 # response = llm.invoke(history.messages)
 # history.add_ai_message(response.content)
+
 # 질문
 # "매번 이 세 줄을 써야 할까요?"
 # 답
