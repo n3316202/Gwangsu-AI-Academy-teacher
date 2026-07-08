@@ -10,7 +10,6 @@ sys.path.append(str(Path(__file__).resolve().parent.parent))
 from llm_loader import init_custom_llm
 # 템플릿 사용
 from langchain_core.prompts import PromptTemplate
-
 from langchain_core.output_parsers import StrOutputParser,JsonOutputParser,XMLOutputParser
 
 llm = init_custom_llm()

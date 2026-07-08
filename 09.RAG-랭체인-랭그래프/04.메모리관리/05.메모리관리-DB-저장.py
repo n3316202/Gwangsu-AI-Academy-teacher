@@ -38,20 +38,32 @@ chain_with_sql_history = RunnableWithMessageHistory(
     history_messages_key="history",
 )
 
-while True:
+# 저장된 정보 가져오기
+history = SQLChatMessageHistory(
+    session_id="user_1",
+    connection="mysql+pymysql://scott:tiger@localhost:3306/scott",
+    table_name="message_store"
+)
 
-    q = input("질문: ")
+messages = history.messages
 
-    if q == "exit":
-        break
+for msg in messages:
+    print(type(msg).__name__, msg.content)
 
-    res = chain_with_sql_history.invoke(
-        {"question": q},
-        config={
-            "configurable": {
-                "session_id": "user_1"
-            }
-        }
-    )
+# while True:
 
-    print("\nAI:", res.content)
+#     q = input("질문: ")
+
+#     if q == "exit":
+#         break
+
+#     res = chain_with_sql_history.invoke(
+#         {"question": q},
+#         config={
+#             "configurable": {
+#                 "session_id": "user_1"
+#             }
+#         }
+#     )
+
+#     print("\nAI:", res.content)
