@@ -67,3 +67,13 @@ for msg in messages:
 #     )
 
 #     print("\nAI:", res.content)
+
+# 저장소 선택 가이드
+# 저장소를 선택할 때 고려사항:
+# │
+# ├─ 개발/테스트 → InMemoryChatMessageHistory
+# │
+# ├─ 프로덕션 (단일 서버)
+# │   │
+# │   ├─ 간단한 구현 → SQLite (SQLChatMessageHistory)
+# │   └─ 기존 DB 활용 → PostgreSQL
