@@ -42,7 +42,9 @@ db = Chroma.from_texts(
 print("벡터 DB 생성")
 
 # Retriever 생성
-retriever = db.as_retriever()
+retriever = db.as_retriever(
+    search_kwargs={"k": 3}
+)
 
 #검색하기
 question = "고양이는 어떤 동물인가요?"
