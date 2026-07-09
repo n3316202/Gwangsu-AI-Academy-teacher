@@ -30,3 +30,24 @@ print("\n앞의 벡터 10개")
 print(vector[:10])
 
 #=============================================================
+
+sentences =[
+    "고양이",
+    "강아지",
+    "자동차"
+]
+
+documents = [
+    "고양이는 귀여운 동물입니다.",
+    "강아지는 충성심이 강합니다.",
+    "자동차는 빠르게 달립니다."
+]
+
+vectors = embedding.embed_documents(documents)
+
+for i in range(len(sentences)):
+    print("="*50)
+    print(documents[i])
+    print("벡터 길이",len(vectors[i]))
+    print("앞의값 5개",vectors[i][:10])
+    
