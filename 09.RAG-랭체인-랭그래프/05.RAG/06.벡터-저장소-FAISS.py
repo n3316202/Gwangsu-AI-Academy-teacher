@@ -9,7 +9,7 @@ embedding = HuggingFaceEmbeddings(
     model_name="BAAI/bge-m3",
 )
 
-BASE_DIR = Path(__file__).resolve().parent #현재 실행 중인 파이썬 파일이 있는 폴더의 절대 경로를
+BASE_DIR = Path(__file__).resolve().parent 
 
 documents = [
     "고양이는 귀여운 동물입니다.",
