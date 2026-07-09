@@ -40,3 +40,4 @@ db = Chroma.from_texts(
 )
 
 print("벡터 DB 생성")
+
