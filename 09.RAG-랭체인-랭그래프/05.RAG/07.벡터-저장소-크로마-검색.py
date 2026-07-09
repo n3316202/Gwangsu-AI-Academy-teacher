@@ -41,3 +41,28 @@ db = Chroma.from_texts(
 
 print("벡터 DB 생성")
 
+# Retriever 생성
+retriever = db.as_retriever()
+
+#검색하기
+question = "고양이는 어떤 동물인가요?"
+docs = retriever.invoke(question)
+
+
+#[Document(id='d2a58595-ea65-49de-8669-80b7278d82eb', metadata={}, page_content='고양이는 귀여운 동물입니다.'), Document(id='50f6eeb4-e0cd-4e6a-993c-0cb95d15d484', metadata={}, page_content='고양이는 귀여운 동물입니다.'), Document(id='e579983d-274f-458b-ae8d-f0bec04ff876', metadata={}, page_content='강아지는 충성심이 강합니다.'), Document(id='557108db-b786-46a8-a029-9234c4cb2fb1', metadata={}, page_content='강아지는 충성심이 강합니다.')]
+
+print(docs)
+
+for doc in docs:
+    print("="*50)
+    print(doc.page_content)
+
+# ==================================================
+# 고양이는 귀여운 동물입니다.
+# ==================================================
+# 고양이는 귀여운 동물입니다.
+# ==================================================
+# 강아지는 충성심이 강합니다.
+# ==================================================
+# 강아지는 충성심이 강합니다.
+
