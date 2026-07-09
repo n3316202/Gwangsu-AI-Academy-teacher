@@ -68,3 +68,40 @@ for doc in docs:
 # ==================================================
 # 강아지는 충성심이 강합니다.
 
+# LLM 연결
+
+import sys
+from pathlib import Path
+import os
+
+sys.path.append(str(Path(__file__).resolve().parent.parent))
+from llm_loader import init_custom_llm
+# 템플릿 사용
+from langchain_core.prompts import PromptTemplate
+
+llm = init_custom_llm()
+
+context = ""
+
+for doc in docs:
+    context = context + doc.page_content
+    context = context + "\n"
+
+question = "고양이는 어떤 동물인가요?"
+
+prompt = f"""
+당신은 친절한 AI입니다.
+
+아래의 문서를 참고하여 답변하세요.
+
+문서:
+{context}
+
+질문:
+{question}
+"""
+
+response = llm.invoke(prompt)
+
+print("=" * 50)
+print(response.content)
