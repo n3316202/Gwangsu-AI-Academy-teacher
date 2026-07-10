@@ -103,11 +103,18 @@ for t in tools:
 
 llm_with_tools = llm.bind_tools(tools)
 
-response =  llm_with_tools.invoke("10과 20을 곱해줘")
+response =  llm_with_tools.invoke("10과 20을 더해줘")
 print(response.content)
 
 ########################################################################
 # 6. Tool Call 확인
+# 사용자
+#     │
+#     ▼
+# LLM
+#     │
+#     ▼
+# Tool 선택
 ########################################################################
 
 if response.tool_calls:
