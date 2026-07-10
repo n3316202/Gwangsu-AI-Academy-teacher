@@ -1,3 +1,4 @@
+#python -m pip install --force-reinstall streamlit
 import streamlit as st
 from rag import ask
 
