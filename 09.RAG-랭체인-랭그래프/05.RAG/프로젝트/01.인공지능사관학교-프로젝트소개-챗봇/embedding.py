@@ -20,6 +20,13 @@ print("페이지수:",len(documents))
 print(documents)
 
 # 2. 문서 분할
+# | 문서 종류  | 추천 chunk_size |
+# | ------ | ------------: |
+# | 짧은 FAQ |       200~400 |
+# | 일반 PDF |      500~1000 |
+# | 기술 문서  |      800~1500 |
+# | 법률 문서  |     1000~2000 |
+# | 논문     |     1000~1500 |
 splitter = RecursiveCharacterTextSplitter(
     chunk_size=500,
     chunk_overlap=100 # 앞뒤로 100글자 겹치게  #chunk_size의 10~20% 정도
