@@ -39,6 +39,10 @@ dic:State = {
 # 노드 가장 기본
 # 그대로 반환
 def info(state:State):
+
+    state["name"]= "홍길순"
+    state["age"]= 39
+    
     return state
 
 # 변경(업데이트) 하여 업데이트 
