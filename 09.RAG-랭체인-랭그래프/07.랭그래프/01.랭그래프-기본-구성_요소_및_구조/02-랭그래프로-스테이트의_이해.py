@@ -12,8 +12,8 @@ dic:State = {
     "name":"홍길동",
     "age": 30
 }
-print(type(dic)) # <class 'dict'>
-print(dic)
+# print(type(dic)) # <class 'dict'>
+# print(dic)
 
 # 주의 
 # dic_persion = State()
