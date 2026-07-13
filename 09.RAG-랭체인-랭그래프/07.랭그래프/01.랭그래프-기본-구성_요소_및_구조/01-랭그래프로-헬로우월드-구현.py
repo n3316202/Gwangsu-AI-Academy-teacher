@@ -5,8 +5,7 @@ class State(TypedDict):
     message:str
 
 def hello(state:State):
-
-    print("헬로우 랭그래프!!")
+    print("헬로우 랭그래프!!")    
     
     return {
         "message": "헬로우 랭그래프!!"
