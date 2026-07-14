@@ -1,7 +1,33 @@
-# 반복문 구현
-# Loop
+# 실행 예
+# 숫자 입력 : 3
+# 업 ↑
 
-# LangGraph에서는 Edge를 자기 자신에게 연결하면 반복 가능
+# 숫자 입력 : 9
+# 다운 ↓
+
+# 숫자 입력 : 5
+# 업 ↑
+
+# 숫자 입력 : 7
+# 정답입니다!
+
+# {'answer': 7, 'guess': 7, 'message': 'SUCCESS'}
+
+
+#              START
+#                │
+#                ▼
+#         input_number
+#                │
+#                ▼
+#        check_number
+#                │
+#        message=="SUCCESS" ?  => route 함수 구현
+#           ┌─────────────┐
+#           │             │
+#           ▼             ▼
+#    input_number        END
+
 
 from typing import TypedDict
 from langgraph.graph import StateGraph, START, END
