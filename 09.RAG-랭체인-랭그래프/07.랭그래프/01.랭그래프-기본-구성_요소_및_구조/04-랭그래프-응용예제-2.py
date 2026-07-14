@@ -27,6 +27,28 @@ builder = StateGraph(State)
 builder.add_node("discount",discount)
 builder.add_node("delivery",delivery)
 
+builder.add_edge(START,"discount")
+builder.add_edge("discount","delivery")
+builder.add_edge("delivery",END)
+
+# 4. 컴파일
+graph = builder.compile()
+
+# 5. 실행
+result = graph.invoke({
+    "price": 100000
+})
+
+print(result)
+print(result["price"])
+
+import sys
+from pathlib import Path
+sys.path.append(str(Path(__file__).resolve().parent.parent))
+
+
+from util import show_graph
+show_graph(graph)
 
 
 # START
