@@ -96,7 +96,7 @@ graph = builder.compile()
 # 실행
 
 result = graph.invoke({
-    "score": 85
+    "score": 70
 })
 
 print(result)
