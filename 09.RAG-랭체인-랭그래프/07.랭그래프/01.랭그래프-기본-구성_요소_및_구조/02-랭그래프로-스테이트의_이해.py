@@ -2,8 +2,7 @@ from typing import TypedDict
 from langgraph.graph import StateGraph, START, END
 
 # 랭그래프 아저씨가 이해하는 딕셔너리를 만들기 위해.
-#
-# 랭그래프 아저씨가 이해하는 딕셔너리를 만들기 위해.
+
 class State(TypedDict):
     name:str
     age:int
@@ -60,7 +59,6 @@ def info(state:State):
 
 #그래프 생성
 builder = StateGraph(State)
-
 builder.add_node("info",info) # 함수 등록 
 
 builder.add_edge(START, "info")
