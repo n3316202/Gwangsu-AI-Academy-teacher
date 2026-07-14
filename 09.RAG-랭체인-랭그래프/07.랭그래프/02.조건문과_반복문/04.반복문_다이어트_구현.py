@@ -7,37 +7,38 @@ from typing import TypedDict
 from langgraph.graph import StateGraph, START, END
 
 class State(TypedDict):
-    count:int
+    weight:int
 
 # node
-def counter(state):
+def diet(state):
+
+    print(f"현재체중 {state["weight"]}kg")
 
     return {
-        "count": state["count"] + 1
+        "weight": state["weight"] - 1
     }
 
 # 분기 함수
-def check_count(state):
+def check_weight(state):
 
-    if state["count"] >= 3:
-        return "end"
-    else:
+    if state["weight"] >= 65:
         return "continue"
+
+    return "end"
 
 # 그래프 객체 생성
 builder = StateGraph(State)
 
-builder.add_node("counter",counter)
+builder.add_node("diet",diet)
 
 
-builder.add_edge(START,"counter")
-
+builder.add_edge(START,"diet") # => 여기 까지
 
 builder.add_conditional_edges(
-    "counter",
-    check_count,
+    "diet",
+    check_weight,
     {
-        "continue":"counter",
+        "continue":"diet",
         "end":END,
     }
 )
@@ -48,11 +49,11 @@ graph = builder.compile()
 # 실행
 
 result = graph.invoke({
-    "count": 0
+    "weight": 70
 })
 
 print(result)
-print(result["count"])
+print(result["weight"])
 
 import sys
 from pathlib import Path
