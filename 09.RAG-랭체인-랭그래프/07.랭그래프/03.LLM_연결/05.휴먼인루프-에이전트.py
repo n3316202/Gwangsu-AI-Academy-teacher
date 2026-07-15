@@ -44,7 +44,7 @@ from langgraph.types import interrupt,Command
 # 1.State 정의
 
 class State(TypedDict):
-    report : str
+    report : "2026년 AI 시장 분석 보고서"
     approved : bool
 
 # node 함수 만들기
@@ -66,6 +66,16 @@ def report_node(state):
 def approval_node(state: State):
     print("\n 결재요청")
     print("결재내용:", state["report"])
+
+    # "여기서 Graph 실행을 중단하고 현재 상태를 저장한 뒤, 나중에 resume()이 호출되면 
+    # 전달받은 값을 answer에 넣어서 이 다음 줄부터 계속 실행하라."
+    
+    #왜 이렇게 만들었을까?
+    #실무에서는 사람이 즉시 입력하지 않는 경우가 많기 때문
+    
+    #팀장이
+    #3시간 뒤
+    #승인할 수도 있습니다.
 
     answer = interrupt(
         "승인 하시겠습니까? (yes,no)"
