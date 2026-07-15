@@ -16,7 +16,7 @@ env_path = Path(__file__).resolve().parent / ".env"
 
 load_dotenv(env_path)
 
-def init_custom_llm(temperature: float= 0.1, max_tokens:int = 2000):
+def init_custom_llm(temperature: float= 0.1, max_tokens:int = 100):
     """지정된 환경변수 모델로 LLM을 초기화합니다."""
     model_name = os.getenv("LLM_AI_MODEL")
     print("모델이름",model_name)

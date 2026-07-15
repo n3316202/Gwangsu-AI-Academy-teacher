@@ -33,53 +33,82 @@ from typing import TypedDict
 from langgraph.graph import StateGraph, START, END
 
 class State(TypedDict):
-    weight:int
+    answer:int
+    guess: int 
+    message: str
+
 
 # node
-def diet(state):
+def input_number(state):
 
-    print(f"현재체중 {state["weight"]}kg")
-
+    guess = int(input("숫자 입력 : "))
+   
     return {
-        "weight": state["weight"] - 1
+        "guess": guess
     }
 
-# 분기 함수
-def check_weight(state):
+def check_number(state):
+    answer = state["answer"]
+    guess = state["guess"]
 
-    if state["weight"] >= 65:
-        return "continue"
+    if guess > answer:
+        print("다운 ↓")
 
-    return "end"
+        return {
+            "message":"DOWN"
+        }
+    elif guess < answer:
+        
+        print("업 ↑")
+
+        return {
+            "message" : "UP"
+        }
+    else:
+        print("정답 입니다.")
+        
+        return {
+            "message" : "SUCCESS"
+        }
+
+# 라우트(route) 함수
+def router(state):
+
+    if state["message"] == "SUCCESS":
+        return "end"
+
+    return "continue"
+
 
 # 그래프 객체 생성
 builder = StateGraph(State)
 
-builder.add_node("diet",diet)
+builder.add_node("input_number",input_number)
+builder.add_node("check_number",check_number)
 
-
-builder.add_edge(START,"diet") # => 여기 까지
+builder.add_edge(START,"input_number") 
+builder.add_edge("input_number","check_number") 
 
 builder.add_conditional_edges(
-    "diet",
-    check_weight,
+    "check_number",
+    router,
     {
-        "continue":"diet",
-        "end":END,
+        "continue":"input_number",
+         "end": END
     }
 )
-
 
 graph = builder.compile()
 
 # 실행
-
 result = graph.invoke({
-    "weight": 70
+    "answer": 7,
+    "guess":0,
+    "message":""
 })
 
 print(result)
-print(result["weight"])
+print(result["message"])
 
 import sys
 from pathlib import Path
