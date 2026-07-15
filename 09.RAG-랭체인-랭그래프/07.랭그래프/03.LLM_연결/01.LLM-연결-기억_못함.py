@@ -42,16 +42,34 @@ graph = builder.compile()
 
 # 실행
 
-result = graph.invoke({
-    "question": "파이썬 설며해줘"
-})
+# result = graph.invoke({
+#     "question": "파이썬 설며해줘"
+# })
 
-print(result["answer"])
+# print(result["answer"])
 
-import sys
-from pathlib import Path
-sys.path.append(str(Path(__file__).resolve().parent.parent))
+# 대화형 챗봇
 
-from util import show_graph
-show_graph(graph)
+while True:
+
+    question = input("질문 :")
+    
+    if question == "exit":
+        break
+
+    result = graph.invoke({
+        "question": question
+    })
+
+    print()
+    print(result["answer"])
+
+
+
+# import sys
+# from pathlib import Path
+# sys.path.append(str(Path(__file__).resolve().parent.parent))
+
+# from util import show_graph
+# show_graph(graph)
 
