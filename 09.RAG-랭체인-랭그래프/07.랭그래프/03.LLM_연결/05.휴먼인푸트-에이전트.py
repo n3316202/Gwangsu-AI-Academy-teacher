@@ -1,3 +1,8 @@
+
+
+
+
+
 from langchain_core.prompts import ChatPromptTemplate
 import sys
 from pathlib import Path
@@ -67,7 +72,19 @@ from langgraph.checkpoint.memory import InMemorySaver
 # | ...                     |
 # +--------------------------+
 
-memory = InMemorySaver()
+from langgraph.checkpoint.sqlite import SqliteSaver
+import sqlite3
+
+#memory = InMemorySaver()
+
+#pip install langgraph-checkpoint-sqlite
+DB_PATH = Path(__file__).parent / "chat.db"
+conn = sqlite3.connect(
+    DB_PATH,
+    check_same_thread=False
+)
+memory= SqliteSaver(conn)
+
 
 # 그래프가 끝날 때마다  State를 저장합니다.
 graph = builder.compile(
@@ -102,8 +119,8 @@ while True:
     
         
     # 저장된 체크포인트 확인
-    for checkpoint in memory.list(None):
-        print(checkpoint)
+    # for checkpoint in memory.list(None):
+    #     print(checkpoint)
 
 
 # import sys
