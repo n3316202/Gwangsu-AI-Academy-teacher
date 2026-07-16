@@ -108,20 +108,19 @@ def finish_refund(state):
     
     return state
 
-
-
 # graph
 
 builder = StateGraph(State)
 
-builder.add_node("report",report_node)
-builder.add_node("approval",approval_node)
-builder.add_node("finish",finish_node)
+builder.add_node("ai_review",ai_review)
+builder.add_node("manager_approval",manager_approval)
+builder.add_node("finish_refund",finish_refund)
 
-builder.add_edge(START,"report")
-builder.add_edge("report","approval")
-builder.add_edge("approval","finish")
-builder.add_edge("finish",END)
+builder.add_edge(START,"ai_review")
+builder.add_edge("ai_review","manager_approval")
+builder.add_edge("manager_approval","finish_refund")
+builder.add_edge("finish_refund",END)
+
 
 from langgraph.checkpoint.memory import InMemorySaver
 
@@ -138,26 +137,30 @@ graph = builder.compile(
 
 config = {
     "configurable":{
-        "thread_id" : "approval-demo"
+        "thread_id" : "approval-refund"
     }
 }
 
 print("=" * 50)
-print("1차 실행")
+print("최초 실행")
 print("=" *50)
 
 result = graph.invoke(
-        {}, # => 초기 state 값
+        {
+            "refund_reason":"상품 파손",
+            "approved":False
+        },
         config = config
     )
 
 print(result)
 
+
 print("=" * 50)
-print("재개")
+print("관리자 승인")
 print("=" *50)
 
-answer = input("승인 여부 (True / False) : ")
+answer = input("승인 여부 (yes / y / 승인) : ")
 approved = answer.strip().lower() in ["yes", "y", "승인"]
 
 result = graph.invoke(
