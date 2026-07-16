@@ -170,7 +170,7 @@ builder.add_node("tool_node",tool_node)
 builder.add_edge(START,"chatbot")
 builder.add_conditional_edges(
     "chatbot",
-    should_continue
+    should_continue,
 )
 
 builder.add_edge(
