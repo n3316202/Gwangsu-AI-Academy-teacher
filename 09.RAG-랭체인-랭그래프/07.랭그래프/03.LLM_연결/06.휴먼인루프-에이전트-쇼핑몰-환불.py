@@ -87,20 +87,28 @@ def ai_review(state):
 # ---------------------------------
 
 def manager_approval(state: State):
-    pass
+    print("\n =====관리자 승인 대기======")
+
+    approved = interrupt("관리자가 승인을 입력하세요")
+
+    return{
+        "approved" : approved
+    }
 
 # ---------------------------------
-# 최종 처리
+# 환불 처리
 # ---------------------------------
-
-def finish_node(state):
+def finish_refund(state):
+    print("\n ===== 환불 처리 ======")
 
     if state["approved"]:
-        print("\n 보고서가 승인 되었습니다.")
+        print("환불이 완료 되었습니다.")
     else:
-        print("\n 보고서가 거절 되었습니다.")
+        print("환불이 거부 되었습니다.")
     
     return state
+
+
 
 # graph
 
