@@ -205,6 +205,66 @@ Debugger의 분석 결과를 참고하여
     }
 
 # ----------------------------------------------------
+#  Reviewer Agent
+# ----------------------------------------------------
+def reviewer(state):
+
+    print("\n=============== reviewer =============")
+
+    messages = state["messages"]
+
+    result = llm.invoke(
+        messages + 
+        [
+            HumanMessage(content=
+    """
+당신은 Senior Python Reviewer 입니다.
+
+아래 수정된 코드를 리뷰하세요.
+
+검토 항목
+
+1. 버그가 해결되었는가?
+
+2. 코드 품질
+
+3. 예외 처리
+
+4. 성능
+
+5. 가독성
+
+6. PEP8 준수
+
+출력 형식
+
+## 리뷰 결과
+
+PASS 또는 FAIL
+
+## 장점
+
+...
+
+## 개선 사항
+
+...
+    """
+            )
+        ]
+    )
+
+    return {
+        "messages":[
+            AIMessage(
+                content = result.content,
+                name="Reviewer"
+            )
+        ],
+        "review_done":True
+    }
+
+# ----------------------------------------------------
 # Supervisor
 # ----------------------------------------------------
 
@@ -225,6 +285,13 @@ def supervisor(state):
         return {
             "next":"coder"
         }
+    
+    # 3 단계
+    if not state["review_done"]: # if state["review_done"] == False        
+        print("Next -> Reviewer")        
+        return {
+            "next":"reviewer"
+        }
 
     return {
         "next":"FINISH"
@@ -239,6 +306,7 @@ builder.add_node("planner",planner)
 builder.add_node("supervisor",supervisor)
 builder.add_node("debugger",debugger)
 builder.add_node("coder",coder)
+builder.add_node("reviewer",reviewer)
 
 # ----------------------------------------------------
 # Edge
@@ -257,6 +325,7 @@ builder.add_conditional_edges(
     {
         "debugger":"debugger",
         "coder":"coder",
+        "reviewer":"reviewer",
         "FINISH":END
     }
 )
@@ -266,6 +335,7 @@ builder.add_conditional_edges(
 
 builder.add_edge("debugger","supervisor")
 builder.add_edge("coder","supervisor")
+builder.add_edge("reviewer","supervisor")
 
 # ----------------------------------------------------
 # Compile
