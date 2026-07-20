@@ -362,10 +362,19 @@ except Exception as e:
 # ----------------------------------------------------
 
 input_code = '''
-def average(nums):
-    return sum(nums) / len(nums)
+def calculate_average(scores):
+    total = sum(scores)
+    average = total / len(scores)
+    return average
 
-print(average([]))
+students = {
+    "Alice": [90, 80, 70],
+    "Bob": [],
+    "Charlie": [100, 95]
+}
+
+for name in students:
+    print(name, calculate_average(students[name]))
 '''
 
 initial_state = {
