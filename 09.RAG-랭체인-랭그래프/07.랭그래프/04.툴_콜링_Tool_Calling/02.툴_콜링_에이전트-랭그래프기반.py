@@ -199,3 +199,25 @@ result = graph.invoke({
 answer = result["messages"][-1].content
 print("AI 답변:",answer)
 
+#            START
+#              │
+#              ▼
+#       +---------------+
+#       |   chatbot     |
+#       +---------------+
+#              │
+#       tool_calls?
+#       ┌──────┴──────┐
+#       │             │
+#       ▼             ▼
+# +--------------+    END
+# |   ToolNode   |
+# +--------------+
+#       │
+#       ▼
+# +---------------+
+# |   chatbot     |
+# +---------------+
+#       │
+#       ▼
+#      END
