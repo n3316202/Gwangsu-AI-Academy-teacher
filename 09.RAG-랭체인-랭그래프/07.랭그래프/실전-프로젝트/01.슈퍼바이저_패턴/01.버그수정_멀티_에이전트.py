@@ -87,7 +87,7 @@ def planner(state):
 
     result = llm.invoke(prompt)
     text = result.content.lower()
-    need_debug = "debug=True" in text()
+    need_debug = "debug=True" in text
 
     return {
         "need_debug":need_debug
@@ -157,7 +157,7 @@ def debugger(state):
                 name="Coder"
             )
         ],
-        "fix_done":True
+        "debug_done":True
     }
 
 # ----------------------------------------------------
@@ -208,5 +208,84 @@ builder.add_conditional_edges(
         "debugger":"debugger",
         "FINISH":END
     }
-
 )
+# ----------------------------------------------------
+# Back To Supervisor
+# ----------------------------------------------------
+
+builder.add_edge("debugger","supervisor")
+
+# ----------------------------------------------------
+# Compile
+# ----------------------------------------------------
+
+graph = builder.compile()
+
+# ----------------------------------------------------
+# (선택) Graph 시각화
+# ----------------------------------------------------
+try:
+    sys.path.append(str(Path(__file__).resolve().parent.parent.parent))
+    from util import show_graph
+
+    print("\n========== Graph Visualization ==========")
+    show_graph(graph)
+
+except Exception as e:
+    print(f"Graph 시각화 생략: {e}")
+
+
+# ----------------------------------------------------
+# 실행 예제
+# ----------------------------------------------------
+
+input_code = '''
+def average(nums):
+    return sum(nums) / len(nums)
+
+print(average([]))
+'''
+
+initial_state = {
+    "messages": [
+        HumanMessage(
+            content=f"""
+아래 Python 코드의 오류를 수정해주세요.
+
+```python
+{input_code}
+```
+"""
+        )
+    ],
+    "need_debug": False,
+    "debug_done": False,
+    "fix_done": False,
+    "review_done": False,
+    "next": "",
+}
+
+
+result = graph.invoke(initial_state)
+
+print("\n" + "=" * 60)
+print("최종 결과")
+print("=" * 60)
+
+for message in result["messages"]:
+
+    name = getattr(message, "name", "User")
+
+    print(f"\n[{name}]")
+    print("-" * 50)
+    print(message.content)
+
+print("\n" + "=" * 60)
+print("상태 정보")
+print("=" * 60)
+
+print(f"need_debug : {result['need_debug']}")
+print(f"debug_done : {result['debug_done']}")
+print(f"fix_done   : {result['fix_done']}")
+print(f"review_done: {result['review_done']}")
+print(f"next       : {result['next']}")
