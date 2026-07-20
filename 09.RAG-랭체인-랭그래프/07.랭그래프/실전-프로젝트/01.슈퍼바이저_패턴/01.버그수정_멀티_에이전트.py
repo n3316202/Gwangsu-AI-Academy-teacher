@@ -161,6 +161,53 @@ def debugger(state):
     }
 
 # ----------------------------------------------------
+#  Coder Agent
+# ----------------------------------------------------
+def coder(state):
+
+    print("\n=============== coder =============")
+
+    messages = state["messages"]
+
+    result = llm.invoke(
+        messages + 
+        [
+            HumanMessage(content=
+    """
+당신은 Python Developer 입니다.
+
+Debugger의 분석 결과를 참고하여
+
+버그를 수정하세요.
+
+조건
+
+- 수정된 Python 코드만 작성하세요.
+
+- 코드 설명은 작성하지 마세요.
+
+- Markdown 설명도 작성하지 마세요.
+
+- 실행 가능한 코드만 출력하세요.
+    """
+            )
+        ]
+    )
+
+    return {
+        "messages":[
+            AIMessage(
+                content = result.content,
+                name="Coder"
+            )
+        ],
+        "fix_done":True
+    }
+
+
+
+
+# ----------------------------------------------------
 # Supervisor
 # ----------------------------------------------------
 
