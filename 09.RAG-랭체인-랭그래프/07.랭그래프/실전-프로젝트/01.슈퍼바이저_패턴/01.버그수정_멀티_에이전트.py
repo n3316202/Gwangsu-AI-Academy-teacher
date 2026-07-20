@@ -204,9 +204,6 @@ Debugger의 분석 결과를 참고하여
         "fix_done":True
     }
 
-
-
-
 # ----------------------------------------------------
 # Supervisor
 # ----------------------------------------------------
@@ -241,6 +238,7 @@ builder = StateGraph(State)
 builder.add_node("planner",planner)
 builder.add_node("supervisor",supervisor)
 builder.add_node("debugger",debugger)
+builder.add_node("coder",coder)
 
 # ----------------------------------------------------
 # Edge
@@ -258,6 +256,7 @@ builder.add_conditional_edges(
     router,
     {
         "debugger":"debugger",
+        "coder":"coder",
         "FINISH":END
     }
 )
@@ -266,6 +265,7 @@ builder.add_conditional_edges(
 # ----------------------------------------------------
 
 builder.add_edge("debugger","supervisor")
+builder.add_edge("coder","supervisor")
 
 # ----------------------------------------------------
 # Compile
