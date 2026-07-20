@@ -154,7 +154,7 @@ def debugger(state):
         "messages":[
             AIMessage(
                 content = result.content,
-                name="Coder"
+                name="debugger"
             )
         ],
         "debug_done":True
@@ -212,16 +212,21 @@ Debugger의 분석 결과를 참고하여
 # ----------------------------------------------------
 
 def supervisor(state):
-
     print("\n=============== supervisor =============")
-
+    
     # 1단계
     if not state["debug_done"]: # if state["debug_done"] == False
-        
         print("Next -> debugger")
         
         return {
             "next":"debugger"
+        }
+    
+    # 2 단계
+    if not state["fix_done"]: # if state["fix_done"] == False        
+        print("Next -> coder")        
+        return {
+            "next":"coder"
         }
 
     return {
