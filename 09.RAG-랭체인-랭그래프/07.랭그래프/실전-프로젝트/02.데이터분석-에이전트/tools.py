@@ -21,7 +21,7 @@ def run_eda(df):
     result.append(df.info())
 
     result.append("========= DESCRIBE ======")
-    result.append(df.describe())
+    result.append(df.describe(include="all"))
 
     return str(result)
 
