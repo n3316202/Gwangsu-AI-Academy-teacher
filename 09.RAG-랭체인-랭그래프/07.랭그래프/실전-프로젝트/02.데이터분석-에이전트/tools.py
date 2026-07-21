@@ -10,6 +10,7 @@ def load_csv(path):
     return df
 
 # EDA
+import io
 def run_eda(df):
 
     result = []
@@ -18,7 +19,10 @@ def run_eda(df):
     result.append(df.head())
 
     result.append("========= INFO ======")
-    result.append(df.info())
+    
+    buffer = io.StringIO()
+    df.info(buf=buffer)
+    result.append(buffer.getvalue())
 
     result.append("========= DESCRIBE ======")
     result.append(df.describe(include="all"))
