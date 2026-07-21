@@ -170,4 +170,38 @@ def summary_node(state):
     """
 
     state["result"] = llm.invoke(prompt).content
+
     return state
+
+# ----------------------
+# Graph
+# ----------------------
+
+builder = StateGraph(AnalysisState)
+builder.add_node("question",question_node)
+builder.add_node("planner",planner_node)
+builder.add_node("eda",eda_node)
+
+builder.add_node("summary",summary_node)
+
+builder.add_edge(START,"question")
+builder.add_edge("question","planner")
+
+builder.add_conditional_edges(
+    "planner",
+    router,
+    {
+        "EDA":"eda"
+    }
+)
+builder.add_edge("eda","summary")
+builder.add_edge("summary",END)
+
+graph = builder.compile()
+
+
+sys.path.append(
+    str(Path(__file__).resolve().parent.parent.parent)
+)
+from util import show_graph
+show_graph(graph)
