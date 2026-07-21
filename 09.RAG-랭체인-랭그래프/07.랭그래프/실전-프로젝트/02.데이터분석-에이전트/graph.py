@@ -148,6 +148,26 @@ def router(state):
 # EDA
 # ----------------------
 def eda_node(state):
-    
+
     state["result"] = run_eda(state["dataframe"])
+    return state
+
+# ----------------------
+# Summary
+# ----------------------
+def summary_node(state):
+
+    prompt = f"""
+    질문
+
+    {state["question"]}
+
+    결과
+
+    {state["result"]}
+
+    사용자에게 설명하세요.
+    """
+
+    state["result"] = llm.invoke(prompt).content
     return state
