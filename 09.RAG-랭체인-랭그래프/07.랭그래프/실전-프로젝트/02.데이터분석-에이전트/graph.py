@@ -300,10 +300,7 @@ builder.add_node("group",group_node)
 
 builder.add_node("plot",plot_node)
 builder.add_node("filter",filter_node)
-
-
 builder.add_node("execute", execute_node)
-
 builder.add_node("summary",summary_node)
 
 builder.add_edge(START,"question")
@@ -319,13 +316,11 @@ builder.add_conditional_edges(
         "FILTER":"filter",
     }
 )
-builder.add_edge("eda","summary")
 
+builder.add_edge("eda","summary")
 builder.add_edge("group","execute")
 builder.add_edge("plot","execute")
-
 builder.add_edge("filter","execute")
-
 builder.add_edge("execute","summary")
 builder.add_edge("summary",END)
 
