@@ -19,3 +19,12 @@ sys.path.append(
 from llm_loader import init_custom_llm
 
 llm = init_custom_llm()
+
+# ----------------------
+# CSV
+# ----------------------
+BASE_DIR = Path(__file__).resolve().parent
+DATA_PATH = BASE_DIR / "data" / "sales.csv"
+
+df = load_csv(str(DATA_PATH))
+print(df)
