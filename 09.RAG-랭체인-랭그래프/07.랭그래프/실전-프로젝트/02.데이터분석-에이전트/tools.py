@@ -2,13 +2,29 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # CSV 읽기
-
 def load_csv(path):
 
     df = pd.read_csv(path)
     df = convert_datetime_columns(df)
 
     return df
+
+# EDA
+def run_eda(df):
+
+    result = []
+
+    result.append("========= HEAD ======")
+    result.append(df.head())
+
+    result.append("========= INFO ======")
+    result.append(df.info())
+
+    result.append("========= DESCRIBE ======")
+    result.append(df.describe())
+
+    return str(result)
+
 
 
 # 날짜 타입 자동 탐색
