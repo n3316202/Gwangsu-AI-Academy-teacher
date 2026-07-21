@@ -200,6 +200,38 @@ def execute_node(state):
         state["result"] = "실패"
 
     return state
+
+# ----------------------
+# PLOT
+# ----------------------
+def plot_node(state):
+
+    prompt = f"""
+    
+    DataFrame 이름은 df 입니다.
+
+    컬럼
+
+    {list(df.columns)}
+
+    질문
+
+    {state["question"]}
+
+    matplotlib 코드 작성
+    plt.show() 포함
+
+    반드시 Python 코드만 출력하세요.
+    설명하지 마세요.
+    Markdown 코드 블록(```python)을 사용하지 마세요.
+    """
+
+    state["code"] = llm.invoke(prompt).content
+
+    return state
+
+
+
 # ----------------------
 # Summary
 # ----------------------
