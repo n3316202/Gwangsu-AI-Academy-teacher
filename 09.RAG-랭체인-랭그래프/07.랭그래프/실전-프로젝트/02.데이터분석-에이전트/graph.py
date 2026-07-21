@@ -21,6 +21,14 @@ from llm_loader import init_custom_llm
 llm = init_custom_llm()
 
 # ----------------------
+# 그래프 한글 처리
+# ----------------------
+import matplotlib.pyplot as plt
+
+plt.rcParams["font.family"] = "Malgun Gothic"
+plt.rcParams["axes.unicode_minus"] = False
+
+# ----------------------
 # CSV
 # ----------------------
 BASE_DIR = Path(__file__).resolve().parent
@@ -263,6 +271,7 @@ builder.add_node("planner",planner_node)
 builder.add_node("eda",eda_node)
 builder.add_node("group",group_node)
 
+builder.add_node("plot",plot_node)
 builder.add_node("execute", execute_node)
 
 builder.add_node("summary",summary_node)
@@ -275,11 +284,16 @@ builder.add_conditional_edges(
     router,
     {
         "EDA":"eda",
-        "GROUP":"group"
+        "GROUP":"group",
+        "PLOT":"plot"
     }
 )
 builder.add_edge("eda","summary")
+
 builder.add_edge("group","execute")
+builder.add_edge("plot","execute")
+
+
 builder.add_edge("execute","summary")
 builder.add_edge("summary",END)
 
