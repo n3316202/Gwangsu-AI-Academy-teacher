@@ -134,3 +134,6 @@ ML
 출력:
 분석 유형 이름 하나만 출력하세요.
 """
+    state["analysis_type"] = llm.invoke(prompt).content.strip().upper()
+    
+    return state
