@@ -137,3 +137,17 @@ ML
     state["analysis_type"] = llm.invoke(prompt).content.strip().upper()
     
     return state
+
+# ----------------------
+# Router
+# ----------------------
+def router(state):
+    return state["analysis_type"]
+
+# ----------------------
+# EDA
+# ----------------------
+def eda_node(state):
+    
+    state["result"] = run_eda(state["dataframe"])
+    return state
