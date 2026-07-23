@@ -5,7 +5,12 @@ import pandas as pd
 # Widget 값 저장
 # 입력 결과 출력
 
-st.title("스트림릿 입력 위젯")
+#st.title("스트림릿 입력 위젯")
+
+st.markdown(
+    "<h1>스트림릿 <span style='color:#FFD700;'>입력</span> 위젯</h1>",
+    unsafe_allow_html=True
+)
 
 # 텍스트 입력
 name = st.text_input("이름입력")
