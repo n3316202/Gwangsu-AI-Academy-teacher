@@ -13,6 +13,9 @@ st.set_page_config(
     page_title="세션과캐쉬"
 )
 
+# 일반 변수는 저장 및 유지가 되지 않음
+# 세션 스테이트는(유저별 변수)는 유저별로 저장가능
+
 # =====================================================
 # Session State 초기화
 # =====================================================
@@ -36,3 +39,42 @@ if st.button("증가-1"):
 st.write("count =", count)
 
 st.divider()
+
+st.title("세션 예제 : 장바구니 예제")
+
+if "cart" not in st.session_state:
+    st.session_state.cart = []
+
+product = st.selectbox(
+    "상품",
+    ["사과","바나나","포도"]
+)
+
+if st.button("담기"):
+    st.session_state.cart.append(product)
+
+st.write("장바구니")
+st.write(st.session_state.cart)
+
+# 캐쉬
+import time
+
+st.divider()
+
+st.title("캐쉬 없이: 예제")
+
+if st.button("실행"):
+    time.sleep(5) # 5초 대기
+    st.success("완료")
+
+st.divider()
+st.title("캐쉬 사용")
+
+@st.cache_data
+def slow_function():
+    time.sleep(5)
+    return "완료"
+
+if st.button("캐쉬 실행"):
+    result = slow_function()
+    st.success(result)
