@@ -10,4 +10,6 @@ with st.form("폼태그"):
 
 if submit:
     st.success("제출완료")
-    st.write(name,email)
+    #st.write(name,email)
+
+    st.write(st.session_state)
