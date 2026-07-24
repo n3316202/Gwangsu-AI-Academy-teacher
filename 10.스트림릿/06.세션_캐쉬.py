@@ -16,7 +16,8 @@ st.set_page_config(
 # =====================================================
 # Session State 초기화
 # =====================================================
-if "count" not in st.session_state:
+# session_state = 유저별 저장공간
+if "count" not in st.session_state: 
     st.session_state.count = 0
 
 if st.button("증가"):
@@ -33,3 +34,5 @@ if st.button("증가-1"):
     count += 1
 
 st.write("count =", count)
+
+st.divider()
