@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 
-# 사용자 입력 받기
+# 사용자 입력 받기v
 # Widget 값 저장
 # 입력 결과 출력
 
