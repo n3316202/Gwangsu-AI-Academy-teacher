@@ -75,6 +75,22 @@ def slow_function():
     time.sleep(5)
     return "완료"
 
+# @st.cache_data
+# def load_data():
+#     time.sleep(5)
+#     return pd.read_csv("iris.csv")
+
+from langchain.chat_models import init_chat_model
+
+# @st.cache_resource
+# def load_llm():
+#     return init_chat_model("gpt-5")
+
+# @st.cache_resource
+# def get_db():
+#     return sqlite3.connect("sample.db")
+
+
 if st.button("캐쉬 실행"):
     result = slow_function()
     st.success(result)
